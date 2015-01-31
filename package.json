@@ -1,0 +1,22 @@
+{
+  "name": "mmse-app",
+  "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js",
+  "version": "0.0.1",
+  "author": "Jossef",
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.4.x"
+  },
+  "dependencies": {
+    "chalk": "latest",
+    "express": "~4.10.1",
+    "express-session": "~1.9.1",
+    "mongodb": "latest",
+    "mqtt": "latest",
+    "nodemailer": "latest",
+    "emailjs": "latest",
+    "nodemailer-smtp-transport": "latest",
+    "socket.io": "^1.2.1",
+    "body-parser": "latest"
+  }
+}

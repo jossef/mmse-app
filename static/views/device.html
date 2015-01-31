@@ -1,0 +1,23 @@
+
+<div class="container">
+    <div class="device-info">
+        <h1>{{device._id}}</h1>
+        <p timer ng-show="device.occupied" start-time="device.occupiedSince" class="">
+            {{minutes}} minutes, {{seconds}} seconds
+        </p>
+
+        <i ng-show="device.occupied" class="fa fa-exclamation-circle"></i>
+        <i ng-hide="device.occupied" class="fa fa-check-circle"></i>
+
+
+        <hr>
+
+        history
+
+
+        <hr>
+
+        subscribe
+    </div>
+</div>
+

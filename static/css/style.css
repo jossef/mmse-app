@@ -1,0 +1,58 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab);
+.growl-item {
+  font-family: "Roboto Slab", serif;
+  font-weight: 700; }
+
+.device-info {
+  transition: all 250ms;
+  padding: 10px 5px 50px 15px; }
+
+.device-list {
+  font-family: "Roboto Slab", serif;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+  .device-list .item {
+    min-height: 100px;
+    margin-bottom: 20px;
+    transition: all 250ms;
+    padding: 5px 5px 5px 15px; }
+    .device-list .item.occupied .icon {
+      color: #f44336; }
+    .device-list .item:hover {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+      transform: translateY(-5px);
+      cursor: pointer; }
+    .device-list .item .title {
+      font-size: 2em; }
+    .device-list .item .icon {
+      color: #4caf50;
+      float: right;
+      font-size: 3em;
+      position: relative;
+      line-height: 100px;
+      padding-right: 15px;
+      top: -5px; }
+    .device-list .item .content {
+      float: left; }
+
+html, body {
+  background-color: #eeeeee;
+  font-family: "Roboto Slab", serif; }
+
+.paper, .device-info, .device-list .item {
+  background-color: white;
+  border-radius: 2px;
+  border: 1px solid #bdbdbd;
+  padding: 20px; }
+
+.nav .button {
+  color: white !important;
+  background-color: #1e88e5; }
+  .nav .button:hover {
+    background-color: #1565c0 !important; }
+
+.btn {
+  font-family: "Roboto Slab", serif; }

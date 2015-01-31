@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="paper col-md-push-2 col-md-8">
+
+        <div ng-switch="stage">
+
+            <div ng-switch-default>
+                <h1>Oops!
+                    <small>unknown exam stage</small>
+                </h1>
+            </div>
+
+            <div ng-switch-when="start">
+                <div class="form-group">
+                    <label>Id</label>
+                    <input type="text" ng-model="exam.id" class="form-control input-lg" placeholder="Enter your id">
+                </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" ng-model="exam.name" class="form-control input-lg"
+                           placeholder="Enter your full name">
+                </div>
+                <a href="#/exam/time" class="btn btn-lg btn-primary pull-right">Next</a>
+            </div>
+
+            <div ng-switch-when="time">
+                {{ exam }}
+            </div>
+        </div>
+    </div>
+</div>
+
