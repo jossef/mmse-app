@@ -1,0 +1,62 @@
+<form name="startForm">
+
+    <h3>Let's Start!
+        <small> fill in the form below</small>
+    </h3>
+
+    <hr>
+
+    <div ng-class="{'has-success':startForm.id.$touched && startForm.id.$valid, 'has-error': startForm.id.$touched && !startForm.id.$valid}"
+         class="form-group has-feedback">
+
+        <label class="control-label">Id</label>
+        <input type="text"
+               name="id"
+               ng-model="exam.id"
+               ng-pattern="/^[0-9]{4,10}$/"
+               ng-trim="true"
+               ng-required="true"
+               class="form-control input-lg"
+               placeholder="Enter your id">
+
+        <div ng-show="startForm.id.$touched" class="form-control-feedback">
+            <span ng-show="startForm.id.$valid" class="glyphicon glyphicon-ok"></span>
+            <span ng-hide="startForm.id.$valid" class="glyphicon glyphicon-remove"></span>
+        </div>
+        <p class="help-block" ng-show="startForm.id.$touched && startForm.id.$error.pattern">Not a valid Id.</p>
+
+        <p class="help-block" ng-show="startForm.id.$touched && startForm.id.$error.required">This field is
+            required.</p>
+
+    </div>
+
+    <div ng-class="{'has-success':startForm.name.$touched && startForm.name.$valid, 'has-error': startForm.name.$touched && !startForm.name.$valid}"
+         class="form-group has-feedback">
+
+        <label class="control-label">Full name</label>
+        <input type="text"
+               name="name"
+               ng-model="exam.name"
+               ng-pattern="/^([ \u00c0-\u01ffa-zA-Z'\-])+$/"
+               ng-trim="true"
+               ng-required="true"
+               class="form-control input-lg"
+               placeholder="Enter your full name">
+
+        <div ng-show="startForm.name.$touched" class="form-control-feedback">
+            <span ng-show="startForm.name.$valid" class="glyphicon glyphicon-ok"></span>
+            <span ng-hide="startForm.name.$valid" class="glyphicon glyphicon-remove"></span>
+        </div>
+        <p class="help-block" ng-show="startForm.name.$touched && startForm.name.$error.pattern">Not a valid Id.</p>
+
+        <p class="help-block" ng-show="startForm.name.$touched && startForm.name.$error.required">This field is
+            required.</p>
+
+    </div>
+</form>
+
+<a href="#/exam/time"
+   ng-class="{'disabled btn-default': !startForm.$valid, 'btn-primary': startForm.$valid}"
+   class="btn btn-lg pull-right">Next</a>
+
+<div class="clearfix"></div>
