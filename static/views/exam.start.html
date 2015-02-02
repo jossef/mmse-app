@@ -23,10 +23,9 @@
             <span ng-show="startForm.id.$valid" class="glyphicon glyphicon-ok"></span>
             <span ng-hide="startForm.id.$valid" class="glyphicon glyphicon-remove"></span>
         </div>
-        <p class="help-block" ng-show="startForm.id.$touched && startForm.id.$error.pattern">Not a valid Id.</p>
+        <p class="help-block" ng-show="startForm.id.$touched && startForm.id.$error.pattern">Invalid.</p>
 
-        <p class="help-block" ng-show="startForm.id.$touched && startForm.id.$error.required">This field is
-            required.</p>
+        <p class="help-block" ng-show="startForm.id.$touched && startForm.id.$error.required">This field is required.</p>
 
     </div>
 
@@ -47,16 +46,17 @@
             <span ng-show="startForm.name.$valid" class="glyphicon glyphicon-ok"></span>
             <span ng-hide="startForm.name.$valid" class="glyphicon glyphicon-remove"></span>
         </div>
-        <p class="help-block" ng-show="startForm.name.$touched && startForm.name.$error.pattern">Not a valid Id.</p>
+        <p class="help-block" ng-show="startForm.name.$touched && startForm.name.$error.pattern">Invalid.</p>
 
-        <p class="help-block" ng-show="startForm.name.$touched && startForm.name.$error.required">This field is
-            required.</p>
+        <p class="help-block" ng-show="startForm.name.$touched && startForm.name.$error.required">This field is required.</p>
 
     </div>
 </form>
 
-<a href="#/exam/time"
-   ng-class="{'disabled btn-default': !startForm.$valid, 'btn-primary': startForm.$valid}"
-   class="btn btn-lg pull-right">Next</a>
+<button
+        ng-click="startForm.$valid && shared.go('/exam/time')"
+        ng-class="{'disabled btn-default': !startForm.$valid, 'btn-primary': startForm.$valid}"
+        class="btn btn-lg pull-right">Next
+</button>
 
 <div class="clearfix"></div>
