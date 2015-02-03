@@ -16,7 +16,6 @@
     var mongoClient = require('mongodb').MongoClient;
     var events = require('events');
     var nodemailer = require('nodemailer');
-    var config = require('./config');
 
     var db = {};
 
@@ -121,94 +120,5 @@
 
     // -----------------------
 
-    // TODO export to different module:
 
-    function onDeviceOccupationUpdate(deviceId, occupied) {
-
-        var now = new Date();
-
-        db.devices.findOne({_id: deviceId},
-            function (err, device) {
-
-            var shouldNotify = true;
-            if (device) {
-                shouldNotify = device.occupied != occupied;
-            }
-            else {
-                device = {
-                    occupiedSince: now
-                }
-            }
-
-            // Persist in database
-            db.devices.update(
-                {_id: deviceId},
-                {
-                    $set: {
-                        occupied: occupied,
-                        lastActive: now,
-                        occupiedSince: now,
-                    }
-                },
-                {upsert: true},
-                errorHandler);
-
-            if (shouldNotify) {
-
-                // PUB/SUB via web sockets
-                var message = {
-                    _id: deviceId,
-                    lastActive: now,
-                    occupied: occupied,
-                    occupiedSince: device.occupiedSince
-                };
-
-                // Notify all subscribers
-                webSockets.emit('devices:update', message);
-                sendNotificationMail(device);
-            }
-
-        });
-
-    }
-
-    function validateEmail(email) {
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-    }
-
-    function sendNotificationMail(device) {
-
-        if(!device.subscribers)
-        {
-            return;
-        }
-
-        var to = '';
-        device.subscribers.forEach(function(subsciber){
-            if (!to)
-            {
-                to += ', ';
-            }
-            to += subsciber;
-        });
-
-        // setup e-mail data with unicode symbols
-        var mailOptions = {
-            from: 'updaterdownloader@gmail.com', // sender address
-            to: to, // list of receivers
-            subject: device._id + ' is unoccupied', // Subject line
-            text: device._id + ' is unoccupied', // plaintext body
-            html: '<b>'+ device._id + 'is unoccupied ✔</b>' // html body
-        };
-
-        // send mail with defined transport object
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Message sent: ' + info.response);
-            }
-        });
-    }
 })();
