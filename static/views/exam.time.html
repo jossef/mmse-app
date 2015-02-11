@@ -1,0 +1,17 @@
+<form name="form" ng-init="next = '/exam/time'">
+
+    <h3>Time
+        <small> related inputs</small>
+    </h3>
+
+    <hr>
+
+</form>
+
+<button
+        ng-click="form.$valid && shared.go(next)"
+        ng-class="{'disabled btn-default': !form.$valid, 'btn-primary': form.$valid}"
+        class="btn btn-lg pull-right">Next
+</button>
+
+<div class="clearfix"></div>

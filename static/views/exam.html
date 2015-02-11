@@ -13,12 +13,8 @@
                 <ng-include src="'/static/views/exam.start.html'"></ng-include>
             </div>
 
-            <div ng-switch-when="next">
-                <ng-include src="'/static/views/exam.start.html'"></ng-include>
-            </div>
-
             <div ng-switch-when="time">
-                {{ exam }}
+                <ng-include src="'/static/views/exam.time.html'"></ng-include>
             </div>
         </div>
     </div>

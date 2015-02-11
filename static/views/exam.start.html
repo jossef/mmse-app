@@ -1,4 +1,4 @@
-<form name="startForm">
+<form name="form" ng-init="next = '/exam/time'">
 
     <h3>Let's Start!
         <small> fill in the form below</small>
@@ -6,7 +6,7 @@
 
     <hr>
 
-    <div ng-class="{'has-success':startForm.id.$touched && startForm.id.$valid, 'has-error': startForm.id.$touched && !startForm.id.$valid}"
+    <div ng-class="{'has-success':form.id.$touched && form.id.$valid, 'has-error': form.id.$touched && !form.id.$valid}"
          class="form-group has-feedback">
 
         <label class="control-label">Id</label>
@@ -15,21 +15,22 @@
                ng-model="exam.id"
                ng-pattern="/^[0-9]{4,10}$/"
                ng-trim="true"
+               ng-enter="form.$valid && shared.go(next)"
                ng-required="true"
                class="form-control input-lg"
                placeholder="Enter your id">
 
-        <div ng-show="startForm.id.$touched" class="form-control-feedback">
-            <span ng-show="startForm.id.$valid" class="glyphicon glyphicon-ok"></span>
-            <span ng-hide="startForm.id.$valid" class="glyphicon glyphicon-remove"></span>
+        <div ng-show="form.id.$touched" class="form-control-feedback">
+            <span ng-show="form.id.$valid" class="glyphicon glyphicon-ok"></span>
+            <span ng-hide="form.id.$valid" class="glyphicon glyphicon-remove"></span>
         </div>
-        <p class="help-block" ng-show="startForm.id.$touched && startForm.id.$error.pattern">Invalid.</p>
+        <p class="help-block" ng-show="form.id.$touched && form.id.$error.pattern">Invalid.</p>
 
-        <p class="help-block" ng-show="startForm.id.$touched && startForm.id.$error.required">This field is required.</p>
+        <p class="help-block" ng-show="form.id.$touched && form.id.$error.required">This field is required.</p>
 
     </div>
 
-    <div ng-class="{'has-success':startForm.name.$touched && startForm.name.$valid, 'has-error': startForm.name.$touched && !startForm.name.$valid}"
+    <div ng-class="{'has-success':form.name.$touched && form.name.$valid, 'has-error': form.name.$touched && !form.name.$valid}"
          class="form-group has-feedback">
 
         <label class="control-label">Full name</label>
@@ -38,24 +39,25 @@
                ng-model="exam.name"
                ng-pattern="/^([ \u00c0-\u01ffa-zA-Z'\-])+$/"
                ng-trim="true"
+               ng-enter="form.$valid && shared.go(next)"
                ng-required="true"
                class="form-control input-lg"
                placeholder="Enter your full name">
 
-        <div ng-show="startForm.name.$touched" class="form-control-feedback">
-            <span ng-show="startForm.name.$valid" class="glyphicon glyphicon-ok"></span>
-            <span ng-hide="startForm.name.$valid" class="glyphicon glyphicon-remove"></span>
+        <div ng-show="form.name.$touched" class="form-control-feedback">
+            <span ng-show="form.name.$valid" class="glyphicon glyphicon-ok"></span>
+            <span ng-hide="form.name.$valid" class="glyphicon glyphicon-remove"></span>
         </div>
-        <p class="help-block" ng-show="startForm.name.$touched && startForm.name.$error.pattern">Invalid.</p>
+        <p class="help-block" ng-show="form.name.$touched && form.name.$error.pattern">Invalid.</p>
 
-        <p class="help-block" ng-show="startForm.name.$touched && startForm.name.$error.required">This field is required.</p>
+        <p class="help-block" ng-show="form.name.$touched && form.name.$error.required">This field is required.</p>
 
     </div>
 </form>
 
 <button
-        ng-click="startForm.$valid && shared.go('/exam/time')"
-        ng-class="{'disabled btn-default': !startForm.$valid, 'btn-primary': startForm.$valid}"
+        ng-click="form.$valid && shared.go(next)"
+        ng-class="{'disabled btn-default': !form.$valid, 'btn-primary': form.$valid}"
         class="btn btn-lg pull-right">Next
 </button>
 
