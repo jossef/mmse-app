@@ -9,8 +9,6 @@
 
         // External
         'ui.bootstrap',
-        'chart.js',
-        'ngAudio',
         'angular-growl',
         'timer',
         'angular.filter',

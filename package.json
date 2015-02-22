@@ -11,11 +11,6 @@
     "chalk": "latest",
     "express": "~4.10.1",
     "express-session": "~1.9.1",
-    "mongodb": "latest",
-    "mqtt": "latest",
-    "nodemailer": "latest",
-    "emailjs": "latest",
-    "nodemailer-smtp-transport": "latest",
     "socket.io": "^1.2.1",
     "body-parser": "latest"
   }

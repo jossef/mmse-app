@@ -4,7 +4,6 @@
     'use strict';
     var expressPort = 8080;
     var expressIPAddress = '0.0.0.0';
-    var mongoDBUrl = 'mongodb://127.0.0.1:27017/MMSE-App';
 
     var chalk = require('chalk');
     var express = require("express");
@@ -13,31 +12,7 @@
     var expressApp = express();
     var http = require('http').Server(expressApp);
     var webSockets = require('socket.io')(http);
-    var mongoClient = require('mongodb').MongoClient;
     var events = require('events');
-    var nodemailer = require('nodemailer');
-
-    var db = {};
-
-    // --------------------------------
-    // Mongo DB
-
-
-    mongoClient.connect(mongoDBUrl, function (err, mongoContext) {
-        if (err) {
-            console.error(chalk.red('Could not connect to MongoDB!'));
-            console.log(chalk.red(err));
-        }
-        else {
-
-            console.log(chalk.bold.green('CONNECTED'), 'mongodb', chalk.cyan(mongoDBUrl));
-
-            mongoContext.createCollection('devices', errorHandler);
-            db.devices = mongoContext.collection('devices');
-
-        }
-    });
-
 
     // --------------------------------
     // Express JS
@@ -47,50 +22,6 @@
 
     // Static files
     expressApp.use('/static/', express.static(path.join(__dirname, 'static')));
-
-    // REST API
-    expressApp.get("/api/devices/", function (request, response) {
-        db.devices.find({},{_id:1, occupied:1, occupiedSince:1, lastActive:1}).toArray(function (err, devices) {
-            response.json(devices);
-        });
-    });
-
-    expressApp.get("/api/devices/:id", function (request, response) {
-
-        var deviceId = request.params.id;
-        db.devices.findOne({_id: deviceId},{_id:1, occupied:1, occupiedSince:1, lastActive:1}, function (err, device) {
-            response.json(device);
-        });
-
-    });
-
-    expressApp.post("/api/devices/:id/subscribe", function (request, response) {
-
-        var deviceId = request.params.id;
-        var body = request.body;
-
-        if (!body.email) {
-            return response.json({error: 'email must be provided'});
-        }
-
-        if (!validateEmail(body.email)) {
-            return response.json({error: 'invalid email provided'});
-        }
-
-        // Persist in database
-        db.devices.update(
-            {_id: deviceId},
-            {
-                $addToSet: {
-                    subscribers: body.email
-                }
-            },
-            {},
-            function (err, rowsAffected) {
-                response.json({success: new Boolean(rowsAffected)});
-            });
-
-    });
 
     // Root Page
     expressApp.get("/", function (request, response) {
