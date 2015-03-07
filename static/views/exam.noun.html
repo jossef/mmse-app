@@ -1,0 +1,19 @@
+<form name="form" ng-init="next = '/exam/place'">
+
+    <h3>Nouns</h3>
+
+    <hr>
+
+    <mmse-noun ng-model="test"></mmse-noun>
+
+    {{test}}
+
+
+</form>
+
+<button ng-click="form.$valid && shared.go(next)"
+        ng-class="{'disabled btn-default': !form.$valid, 'btn-primary': form.$valid}"
+        class="btn btn-lg pull-right">Next
+</button>
+
+<div class="clearfix"></div>

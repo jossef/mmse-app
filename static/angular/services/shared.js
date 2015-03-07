@@ -17,16 +17,19 @@
         var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         var seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
-        var validStages = ['optal', 'start', 'time', 'place'];
+        var validStages = ['optal', 'start', 'time', 'place', 'noun'];
+        var nouns = ['time', 'year', 'thing', 'way', 'side', 'end', 'car', 'team', 'idea', 'work'];
 
         return {
             days: days,
+            nouns: nouns,
             months: months,
             seasons: seasons,
             getExam: getExam,
             clearExam: clearExam,
             showNotification: showNotification,
             contains: contains,
+            shuffle: shuffle,
             isValidStage: isValidStage,
             go: go
         };
@@ -65,6 +68,12 @@
             }
 
             return false;
+        }
+
+        function shuffle(array) {
+            var clone = array.slice();
+            for (var j, x, i = clone.length; i; j = Math.floor(Math.random() * i), x = clone[--i], clone[i] = clone[j], clone[j] = x);
+            return clone;
         }
     });
 

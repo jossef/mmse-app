@@ -1,0 +1,10 @@
+
+
+<div ng-hide="started">
+    <p>You will now about to view 3 different nouns. each noun will be presented for 10 seconds. you will need to write them in the next page.</p>
+    <button class="btn btn-primary" ng-click="start()">Begin</button>
+</div>
+
+<div ng-show="started" class="text-center">
+    <h2>{{currentWord | uppercase}}</h2>
+</div>
