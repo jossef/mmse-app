@@ -3,14 +3,18 @@
 
     var app = angular.module('mmse-app');
 
-    app.factory("SharedService", function ($location, $rootScope, growl) {
+    app.factory("SharedService", function ($location, $rootScope, growl, localStorageService) {
 
         var path;
-        $rootScope.$watch(function(){
+        var exam = localStorageService.get('exam') || {};
 
-        });
+        $rootScope.$watchCollection(function () {
+                return exam;
+            },
+            function (newValue) {
+                localStorageService.set('exam', newValue);
+            });
 
-        var exam = {};
 
         return {
             getExam: getExam,

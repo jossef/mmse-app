@@ -25,6 +25,7 @@
     "material-colors": "~1.0.0",
     "fontawesome": "~4.2.0",
     "angular-timer": "~1.2.0",
-    "angular-filter": "~0.5.2"
+    "angular-filter": "~0.5.2",
+    "angular-local-storage": "~0.1.5"
   }
 }

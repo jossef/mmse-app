@@ -3,7 +3,7 @@
 
     var app = angular.module('mmse-app');
 
-    app.controller("ExamController", function ($scope, $routeParams, SharedService) {
+    app.controller("ExamController", function ($scope,$window, $routeParams, SharedService) {
         var vm = $scope;
         vm.stage = $routeParams.stage;
         vm.exam = SharedService.getExam();
@@ -12,6 +12,11 @@
         {
             SharedService.clearExam();
         }
+
+        vm.back = function()
+        {
+            $window.history.back();
+        };
     });
 
 })();

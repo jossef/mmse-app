@@ -1,12 +1,16 @@
 <div class="container">
     <div class="paper col-md-push-2 col-md-8">
 
+        <button class="btn btn-default" ng-click="back()"><span class="glyphicon glyphicon-arrow-left"></span></button>
+
         <div ng-switch="stage">
 
             <div ng-switch-default>
-                <h1>Oops!
+                <h3>Oops!
                     <small>unknown exam stage</small>
-                </h1>
+                </h3>
+
+                <a href="#/" class="btn btn-primary pull-right">Return</a>
             </div>
 
             <div ng-switch-when="start">

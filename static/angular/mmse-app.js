@@ -14,8 +14,8 @@
         'angular-growl',
         'timer',
         'angular.filter',
-
-        'socket-io'
+        'socket-io',
+        'LocalStorageModule'
     ]);
 
     // ......................................................
