@@ -5,7 +5,6 @@
 
     app.factory("SharedService", function ($location, $rootScope, growl, localStorageService) {
 
-        var path;
         var exam = localStorageService.get('exam') || {};
 
         $rootScope.$watch(function () {
@@ -13,12 +12,11 @@
             },
             function (newValue) {
                 localStorageService.set('exam', newValue);
-                console.log(newValue);
             }, true);
 
         var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-        var seasons = ['Spring','Summer','Fall','Winter'];
+        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
 
         return {
             days: days,
