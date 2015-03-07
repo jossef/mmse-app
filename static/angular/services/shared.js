@@ -12,6 +12,7 @@
             },
             function (newValue) {
                 localStorageService.set('exam', newValue);
+                console.log(newValue);
             }, true);
 
         var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -19,10 +20,12 @@
         var seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
         var validStages = ['optal', 'start', 'time', 'place', 'noun'];
         var nouns = ['time', 'year', 'thing', 'way', 'side', 'end', 'car', 'team', 'idea', 'work'];
+        var imageNouns = ['door', 'hand', 'water', 'eye', 'money', 'face', 'house', 'car', 'party', 'book'];
 
         return {
             days: days,
             nouns: nouns,
+            imageNouns: imageNouns,
             months: months,
             seasons: seasons,
             getExam: getExam,

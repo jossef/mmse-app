@@ -3,10 +3,10 @@
 
     var app = angular.module('mmse-app');
 
-    app.directive('mmseNoun', function ($timeout, SharedService) {
+    app.directive('mmseImageNoun', function ($timeout, SharedService) {
         return {
             require: 'ngModel',
-            templateUrl: '/static/views/mmse-noun.html',
+            templateUrl: '/static/views/mmse-image-noun.html',
             scope: {},
             link: function (vm, element, attrs, ngModel) {
                 var requiredNouns = 3;
@@ -19,6 +19,9 @@
                 var nouns = SharedService.shuffle(SharedService.nouns).splice(0, requiredNouns);
                 var index = 0;
 
+                vm.items
+
+                vm.started = false;
                 var processItem = function () {
                     vm.currentWord = nouns[index];
                     index++;
@@ -33,10 +36,8 @@
                     }
                 };
 
-                vm.started = false;
-                vm.start = function () {
+                vm.next = function () {
                     processItem();
-                    vm.started = true;
                 }
 
             }
