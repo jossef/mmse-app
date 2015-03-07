@@ -8,15 +8,22 @@
         var path;
         var exam = localStorageService.get('exam') || {};
 
-        $rootScope.$watchCollection(function () {
+        $rootScope.$watch(function () {
                 return exam;
             },
             function (newValue) {
                 localStorageService.set('exam', newValue);
-            });
+                console.log(newValue);
+            }, true);
 
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        var seasons = ['Spring','Summer','Fall','Winter'];
 
         return {
+            days: days,
+            months: months,
+            seasons: seasons,
             getExam: getExam,
             clearExam: clearExam,
             showNotification: showNotification,
