@@ -15,7 +15,8 @@
         'timer',
         'angular.filter',
         'socket-io',
-        'LocalStorageModule'
+        'LocalStorageModule',
+        'google.places'
     ]);
 
     // ......................................................

@@ -26,6 +26,7 @@
     "fontawesome": "~4.2.0",
     "angular-timer": "~1.2.0",
     "angular-filter": "~0.5.2",
-    "angular-local-storage": "~0.1.5"
+    "angular-local-storage": "~0.1.5",
+    "angular-google-places-autocomplete": "~0.2.5"
   }
 }

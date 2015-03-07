@@ -1,0 +1,67 @@
+<form name="form" ng-init="next = '/exam/place'">
+
+    <h3>Place
+        <small> related inputs</small>
+    </h3>
+
+    <hr>
+
+    <!-- Year -->
+    <div ng-class="{'has-success':form.location.$touched && form.location.$valid, 'has-error': form.location.$touched && !form.location.$valid}"
+         class="form-group has-feedback">
+
+        <label class="control-label">Location</label>
+        <input type="text"
+               name="location"
+               ng-model="exam.place.location"
+               ng-trim="true"
+               ng-enter="form.$valid && shared.go(next)"
+               ng-required="true"
+               class="form-control input-lg"
+               placeholder="Enter the current year"
+               g-places-autocomplete
+               >
+
+        <div ng-show="form.location.$touched" class="form-control-feedback">
+            <span ng-show="form.location.$valid" class="glyphicon glyphicon-ok"></span>
+            <span ng-hide="form.location.$valid" class="glyphicon glyphicon-remove"></span>
+        </div>
+        <p class="help-block" ng-show="form.location.$touched && form.location.$error.required">This field is required.</p>
+
+    </div>
+
+
+    <!-- Floor -->
+    <div ng-class="{'has-success':form.floor.$touched && form.floor.$valid, 'has-error': form.floor.$touched && !form.floor.$valid}"
+         class="form-group has-feedback">
+
+        <label class="control-label">Floor</label>
+        <input type="text"
+               name="floor"
+               ng-model="exam.place.floor"
+               ng-pattern="/^(-)*[0-9]{1,3}$/"
+               ng-enter="form.$valid && shared.go(next)"
+               ng-required="true"
+               class="form-control input-lg"
+               placeholder="Enter the current year"
+                >
+
+        <div ng-show="form.floor.$touched" class="form-control-feedback">
+            <span ng-show="form.floor.$valid" class="glyphicon glyphicon-ok"></span>
+            <span ng-hide="form.floor.$valid" class="glyphicon glyphicon-remove"></span>
+        </div>
+        <p class="help-block" ng-show="form.floor.$touched && form.floor.$error.pattern">Invalid.</p>
+
+        <p class="help-block" ng-show="form.floor.$touched && form.floor.$error.required">This field is required.</p>
+
+    </div>
+
+
+</form>
+
+<button ng-click="form.$valid && shared.go(next)"
+        ng-class="{'disabled btn-default': !form.$valid, 'btn-primary': form.$valid}"
+        class="btn btn-lg pull-right">Next
+</button>
+
+<div class="clearfix"></div>
