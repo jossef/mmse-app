@@ -3,24 +3,18 @@
 
         <button class="btn btn-link" ng-click="back()"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
 
-        <div ng-switch="stage">
+        <div ng-hide="isValidStage">
+            <h3>Oops!
+                <small>unknown exam stage</small>
+            </h3>
 
-            <div ng-switch-default>
-                <h3>Oops!
-                    <small>unknown exam stage</small>
-                </h3>
-
-                <a href="#/" class="btn btn-primary pull-right">Return</a>
-            </div>
-
-            <div ng-switch-when="start">
-                <ng-include src="'/static/views/exam.start.html'"></ng-include>
-            </div>
-
-            <div ng-switch-when="time">
-                <ng-include src="'/static/views/exam.time.html'"></ng-include>
-            </div>
+            <a href="#/" class="btn btn-primary pull-right">Return</a>
         </div>
+
+        <div ng-if="isValidStage">
+            <ng-include src="'/static/views/exam.' + stage + '.html'"></ng-include>
+        </div>
+
     </div>
 </div>
 

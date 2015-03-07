@@ -8,6 +8,7 @@
         vm.stage = $routeParams.stage;
         vm.exam = SharedService.getExam();
 
+        vm.isValidStage = SharedService.isValidStage(vm.stage);
         if (vm.stage == 'finish')
         {
             SharedService.clearExam();
