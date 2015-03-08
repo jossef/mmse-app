@@ -6,36 +6,64 @@
 
     <hr>
 
-    <!-- Year -->
-    <div ng-class="{'has-success':form.location.$touched && form.location.$valid, 'has-error': form.location.$touched && !form.location.$valid}"
+
+    <!-- Country -->
+    <div ng-class="{'has-success':form.country.$touched && form.country.$valid, 'has-error': form.country.$touched && !form.country.$valid}"
          class="form-group has-feedback">
 
-        <label class="control-label">Location</label>
+        <label class="control-label">Country</label>
+        <select name="country"
+                ng-model="exam.time.country"
+                ng-enter="form.$valid && shared.go(next)"
+                ng-required="true"
+                class="form-control input-lg"
+                ng-options="item for item in shared.countries">
+
+            <option value="" disabled>Choose Country</option>
+        </select>
+
+        <div ng-show="form.country.$touched" class="form-control-feedback">
+            <span ng-show="form.country.$valid" class="glyphicon glyphicon-ok"></span>
+            <span ng-hide="form.country.$valid" class="glyphicon glyphicon-remove"></span>
+        </div>
+        <p class="help-block" ng-show="form.country.$touched && form.country.$error.pattern">Invalid.</p>
+
+        <p class="help-block" ng-show="form.country.$touched && form.country.$error.required">This field is required.</p>
+
+    </div>
+    
+    <!-- City -->
+    <div ng-class="{'has-success':form.city.$touched && form.city.$valid, 'has-error': form.city.$touched && !form.city.$valid}"
+         class="form-group has-feedback">
+
+        <label class="control-label">City</label>
         <input type="text"
-               name="location"
-               ng-model="exam.place.location"
+               name="city"
+               ng-model="exam.place.city"
+               ng-pattern="/^([ \u00c0-\u01ffa-zA-Z'\-])+$/"
                ng-trim="true"
                ng-enter="form.$valid && shared.go(next)"
                ng-required="true"
                class="form-control input-lg"
-               placeholder="Enter the current year"
-               g-places-autocomplete
+               placeholder="Enter your current City"
                >
 
-        <div ng-show="form.location.$touched" class="form-control-feedback">
-            <span ng-show="form.location.$valid" class="glyphicon glyphicon-ok"></span>
-            <span ng-hide="form.location.$valid" class="glyphicon glyphicon-remove"></span>
+        <div ng-show="form.city.$touched" class="form-control-feedback">
+            <span ng-show="form.city.$valid" class="glyphicon glyphicon-ok"></span>
+            <span ng-hide="form.city.$valid" class="glyphicon glyphicon-remove"></span>
         </div>
-        <p class="help-block" ng-show="form.location.$touched && form.location.$error.required">This field is required.</p>
+        <p class="help-block" ng-show="form.city.$touched && form.city.$error.pattern">Invalid.</p>
+        <p class="help-block" ng-show="form.city.$touched && form.city.$error.required">This field is required.</p>
 
     </div>
+
 
 
     <!-- Floor -->
     <div ng-class="{'has-success':form.floor.$touched && form.floor.$valid, 'has-error': form.floor.$touched && !form.floor.$valid}"
          class="form-group has-feedback">
 
-        <label class="control-label">Floor</label>
+        <label class="control-label">Building Floor</label>
         <input type="text"
                name="floor"
                ng-model="exam.place.floor"
@@ -43,7 +71,7 @@
                ng-enter="form.$valid && shared.go(next)"
                ng-required="true"
                class="form-control input-lg"
-               placeholder="Enter the current year"
+               placeholder="Enter the current building floor"
                 >
 
         <div ng-show="form.floor.$touched" class="form-control-feedback">
