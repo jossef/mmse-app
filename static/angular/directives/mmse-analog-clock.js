@@ -10,10 +10,32 @@
             scope: {},
             link: function (vm, element, attrs, ngModel) {
 
-                var hours = vm.hours = SharedService.getRandomInt(0, 12);
-                var minutes = vm.minutes = SharedService.getRandomInt(0, 5) * 10;
 
-                ngModel.$setViewValue([hours, minutes]);
+                var hours;
+                var minutes;
+
+                vm.$watch(function () {
+                        return ngModel.$modelValue;
+                    },
+                    function (value) {
+
+                        if (ngModel.$viewValue) {
+                            hours = ngModel.$viewValue.hours;
+                            minutes = ngModel.$viewValue.minutes;
+
+                        }
+                        else {
+                            hours = SharedService.getRandomInt(0, 12);
+                            minutes = SharedService.getRandomInt(0, 5) * 10;
+
+                        }
+
+                        vm.hours = hours;
+                        vm.minutes = minutes;
+
+                        ngModel.$setViewValue({hours: hours, minutes: minutes});
+                    }, true);
+
 
             }
         }
