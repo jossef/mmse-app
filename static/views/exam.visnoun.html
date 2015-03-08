@@ -1,0 +1,24 @@
+<form name="form" ng-init="next = '/exam/visnoun'">
+
+    <h3>Visual Nouns</h3>
+
+    <hr>
+
+
+    <div ng-show="exam.visnoun">
+        <p><strong class="text-success">This step is completed!</strong></p><p> <a href ng-click="exam.visnoun = undefined;">click here</a> if you still wish to do it again</p>
+    </div>
+
+    <div ng-if="!exam.visnoun">
+        <mmse-visnoun ng-model="exam.visnoun" ng-required="true"></mmse-visnoun>
+    </div>
+
+
+</form>
+
+<button ng-click="form.$valid && shared.go(next)"
+        ng-class="{'disabled btn-default': !form.$valid, 'btn-primary': form.$valid}"
+        class="btn btn-lg pull-right">Next
+</button>
+
+<div class="clearfix"></div>

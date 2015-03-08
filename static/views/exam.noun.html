@@ -1,4 +1,4 @@
-<form name="form" ng-init="next = '/exam/place'">
+<form name="form" ng-init="next = '/exam/visnoun'">
 
     <h3>Nouns</h3>
 
@@ -6,10 +6,10 @@
 
 
     <div ng-show="exam.noun.source">
-        <p>This step is done. <a href ng-click="exam.noun.source = undefined;">click here</a> if you still wish to do it again</p>
+        <p><strong class="text-success">This step is completed!</strong></p><p> <a href ng-click="exam.noun.source = undefined;">click here</a> if you still wish to do it again</p>
     </div>
 
-    <div ng-hide="exam.noun.source">
+    <div ng-if="!exam.noun.source">
         <mmse-noun ng-model="exam.noun.source" ng-required="true"></mmse-noun>
     </div>
 
