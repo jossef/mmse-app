@@ -1,0 +1,71 @@
+<form name="form" ng-init="next = '/exam/place'">
+
+    <h3>Clock</h3>
+
+    <hr>
+
+    <!-- Time -->
+    <div ng-class="{'has-success':form.time.$touched && form.time.$valid, 'has-error': form.time.$touched && !form.time.$valid}"
+         class="form-group has-feedback">
+
+        <label class="control-label">Type in 24H Format "Five and a half afternoon"</label>
+        <input type="text"
+               name="time"
+               ng-model="exam.clock.sentence"
+               ng-trim="true"
+               ng-pattern="/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"
+               ng-enter="form.$valid && shared.go(next)"
+               ng-required="true"
+               class="form-control input-lg"
+               placeholder="HH:MM">
+
+        <div ng-show="form.time.$touched" class="form-control-feedback">
+            <span ng-show="form.time.$valid" class="glyphicon glyphicon-ok"></span>
+            <span ng-hide="form.time.$valid" class="glyphicon glyphicon-remove"></span>
+        </div>
+        <p class="help-block" ng-show="form.time.$touched && form.time.$error.pattern">Invalid.</p>
+
+        <p class="help-block" ng-show="form.time.$touched && form.time.$error.required">This field is required.</p>
+
+    </div>
+
+    <hr>
+    <!-- Analog Clock -->
+
+    <div class="text-center">
+        <mmse-analog-clock ng-model="exam.clock.analog.source"></mmse-analog-clock>
+    </div>
+
+    <div ng-class="{'has-success':form.analog.$touched && form.analog.$valid, 'has-error': form.analog.$touched && !form.analog.$valid}"
+         class="form-group has-feedback">
+
+        <label class="control-label">Type in 12H Format of the analog clock above</label>
+        <input type="text"
+               name="analog"
+               ng-model="exam.clock.analog.input"
+               ng-pattern="/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"
+               ng-trim="true"
+               ng-enter="form.$valid && shared.go(next)"
+               ng-required="true"
+               class="form-control input-lg"
+               placeholder="HH:MM">
+
+        <div ng-show="form.analog.$touched" class="form-control-feedback">
+            <span ng-show="form.analog.$valid" class="glyphicon glyphicon-ok"></span>
+            <span ng-hide="form.analog.$valid" class="glyphicon glyphicon-remove"></span>
+        </div>
+        <p class="help-block" ng-show="form.analog.$touched && form.analog.$error.pattern">Invalid.</p>
+
+        <p class="help-block" ng-show="form.analog.$touched && form.analog.$error.required">This field is required.</p>
+
+    </div>
+
+
+</form>
+
+<button ng-click="form.$valid && shared.go(next)"
+        ng-class="{'disabled btn-default': !form.$valid, 'btn-primary': form.$valid}"
+        class="btn btn-lg pull-right">Next
+</button>
+
+<div class="clearfix"></div>
