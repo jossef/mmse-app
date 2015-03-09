@@ -26,7 +26,7 @@
                         }
                         else {
                             hours = SharedService.getRandomInt(0, 12);
-                            minutes = SharedService.getRandomInt(0, 5) * 10;
+                            minutes = SharedService.getRandomInt(0, 4) * 15;
 
                         }
 

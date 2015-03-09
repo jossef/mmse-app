@@ -4,40 +4,47 @@
     'use strict';
     var expressPort = 8080;
     var expressIPAddress = '0.0.0.0';
-    var mongoDBUrl = 'mongodb://127.0.0.1:27017/MMSE-App';
 
     var chalk = require('chalk');
     var express = require("express");
     var bodyParser = require('body-parser');
     var path = require("path");
+    var fs = require('fs');
     var expressApp = express();
     var http = require('http').Server(expressApp);
-    var webSockets = require('socket.io')(http);
-    var mongoClient = require('mongodb').MongoClient;
     var events = require('events');
-    var nodemailer = require('nodemailer');
+    var dateFormat = require('dateformat');
+    var levenshtein = require('levenshtein');
 
-    var db = {};
 
     // --------------------------------
-    // Mongo DB
+    // Persistence
 
+    var db;
+    var persistanceFilename = 'mmse-data.json';
+    var exists = fs.existsSync(persistanceFilename);
 
-    mongoClient.connect(mongoDBUrl, function (err, mongoContext) {
-        if (err) {
-            console.error(chalk.red('Could not connect to MongoDB!'));
-            console.log(chalk.red(err));
-        }
-        else {
+    if (exists) {
+        db = JSON.parse(fs.readFileSync(persistanceFilename, 'utf8'));
+    }
+    else {
+        db = {
+            exams: {},
+            statistics: {}
+        };
+    }
 
-            console.log(chalk.bold.green('CONNECTED'), 'mongodb', chalk.cyan(mongoDBUrl));
-
-            mongoContext.createCollection('devices', errorHandler);
-            db.devices = mongoContext.collection('devices');
-
-        }
-    });
-
+    function persist() {
+        fs.writeFile(persistanceFilename,
+            JSON.stringify(db, null, 4), function (err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("JSON saved to " + persistanceFilename);
+                }
+            }
+        )
+    }
 
     // --------------------------------
     // Express JS
@@ -49,47 +56,61 @@
     expressApp.use('/static/', express.static(path.join(__dirname, 'static')));
 
     // REST API
-    expressApp.get("/api/devices/", function (request, response) {
-        db.devices.find({},{_id:1, occupied:1, occupiedSince:1, lastActive:1}).toArray(function (err, devices) {
-            response.json(devices);
-        });
+    expressApp.get("/api/exams/", function (request, response) {
+        response.json({hello: 1});
     });
 
-    expressApp.get("/api/devices/:id", function (request, response) {
+    expressApp.get("/api/exams/:userId", function (request, response) {
 
-        var deviceId = request.params.id;
-        db.devices.findOne({_id: deviceId},{_id:1, occupied:1, occupiedSince:1, lastActive:1}, function (err, device) {
-            response.json(device);
-        });
+        var userId = request.params.userId;
 
+        var exam = db.exams[userId];
+        var history = exam && exam.history || [];
+
+        response.json(history);
     });
 
-    expressApp.post("/api/devices/:id/subscribe", function (request, response) {
+    expressApp.post("/api/exams/", function (request, response) {
 
-        var deviceId = request.params.id;
-        var body = request.body;
+        var exam = request.body;
+        var maxHistoryItems = 10;
 
-        if (!body.email) {
-            return response.json({error: 'email must be provided'});
+        var userId = exam.id;
+        var dbExam = db.exams[userId];
+        if (!dbExam) {
+            dbExam = {
+                history: []
+            };
+
+            db.exams[userId] = dbExam;
         }
 
-        if (!validateEmail(body.email)) {
-            return response.json({error: 'invalid email provided'});
+        // TODO calculate the score
+        var score = 3;
+
+        // ------------------------------------
+        // Calculate Score
+
+
+        // EXP
+        var a = new levenshtein( 'hello', 'ello' );
+        console.log(chalk.bold.yellow(a.distance));
+
+
+        // ------------------------------------
+        //
+
+        var now = new Date();
+        exam.date = dateFormat(now, "yyyy-mm-dd h:MM:ss");
+        while (dbExam.history.length > maxHistoryItems)
+        {
+            dbExam.history.pop();
         }
 
-        // Persist in database
-        db.devices.update(
-            {_id: deviceId},
-            {
-                $addToSet: {
-                    subscribers: body.email
-                }
-            },
-            {},
-            function (err, rowsAffected) {
-                response.json({success: new Boolean(rowsAffected)});
-            });
+        dbExam.history.unshift(exam);
+        persist();
 
+        return response.json(dbExam);
     });
 
     // Root Page
@@ -104,9 +125,6 @@
 
     console.log(chalk.bold.yellow('LISTENING'), 'express', chalk.cyan(expressIPAddress), chalk.cyan(expressPort));
 
-    // --------------------------------
-    // Error Handlers
-
     function errorHandler(error) {
         if (error) {
             console.log(chalk.bold.red('ERROR'), error);
@@ -116,9 +134,9 @@
     process.on('uncaughtException', function (err) {
         // Ignored Purposely (client disconnection can cause ECONNRESET)
         // so this type of unhandled errors go here instead of crashing the process
+
+        console.log(chalk.bold.red('ERROR'), err);
     });
 
-    // -----------------------
-
-
-})();
+})
+();

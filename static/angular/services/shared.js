@@ -3,7 +3,7 @@
 
     var app = angular.module('mmse-app');
 
-    app.factory("SharedService", function ($location, $rootScope, growl, localStorageService) {
+    app.factory("SharedService", function ($location, $http, $rootScope, growl, localStorageService, ApiService) {
 
         var exam = localStorageService.get('exam') || {};
 
@@ -37,6 +37,8 @@
             shuffle: shuffle,
             getRandomInt: getRandomInt,
             isValidStage: isValidStage,
+            submitExam: submitExam,
+            setStage: setStage,
             go: go
         };
 
@@ -54,8 +56,16 @@
             }
         }
 
+        function submitExam() {
+            ApiService.submitExam(exam);
+        }
+
         function go(path) {
             $location.path(path);
+        }
+
+        function setStage(stage) {
+            go('/exam/' + stage);
         }
 
         function isValidStage(stage) {

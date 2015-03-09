@@ -14,7 +14,6 @@
         'angular-growl',
         'timer',
         'angular.filter',
-        'socket-io',
         'LocalStorageModule',
         'google.places'
     ]);

@@ -11,13 +11,30 @@
         vm.isValidStage = SharedService.isValidStage(vm.stage);
         if (vm.stage == 'finish')
         {
-            SharedService.clearExam();
+            SharedService.submitExam();
         }
 
         vm.back = function()
         {
             $window.history.back();
         };
+
+        var startTime = new Date();
+        vm.next = function(nextStage)
+        {
+            var endTime = new Date();
+
+            var duration = endTime.getTime() - startTime.getTime() ;
+
+            if (!vm.exam.duration)
+            {
+                vm.exam.duration = {};
+            }
+
+            vm.exam.duration[vm.stage] = duration;
+
+            SharedService.setStage(nextStage);
+        }
     });
 
 })();
