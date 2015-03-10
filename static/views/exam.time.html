@@ -16,7 +16,7 @@
                ng-model="exam.time.year"
                ng-pattern="/^[0-9]{4}$/"
                ng-trim="true"
-               ng-enter="form.$valid && shared.go(next)"
+               ng-enter="form.$valid && next('calc2')"
                ng-required="true"
                class="form-control input-lg"
                placeholder="Enter the current year">
@@ -39,7 +39,7 @@
         <label class="control-label">Day</label>
         <select name="day"
                ng-model="exam.time.day"
-               ng-enter="form.$valid && shared.go(next)"
+               ng-enter="form.$valid && next('calc2')"
                ng-required="true"
                class="form-control input-lg"
                 ng-options="item as item for item in shared.days">
@@ -64,7 +64,7 @@
         <label class="control-label">Month</label>
         <select name="month"
                 ng-model="exam.time.month"
-                ng-enter="form.$valid && shared.go(next)"
+                ng-enter="form.$valid && next('calc2')"
                 ng-required="true"
                 class="form-control input-lg"
                 ng-options="item for item in shared.months">
@@ -89,7 +89,7 @@
         <label class="control-label">Season</label>
         <select name="season"
                 ng-model="exam.time.season"
-                ng-enter="form.$valid && shared.go(next)"
+                ng-enter="form.$valid && next('calc2')"
                 ng-required="true"
                 class="form-control input-lg"
                 ng-options="item for item in shared.seasons">
@@ -109,7 +109,7 @@
 
 </form>
 
-<button ng-click="form.$valid && next('place')"
+<button ng-click="form.$valid && next('calc2')"
         ng-class="{'disabled btn-default': !form.$valid, 'btn-primary': form.$valid}"
         class="btn btn-lg pull-right">Next
 </button>

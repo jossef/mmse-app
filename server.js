@@ -14,7 +14,7 @@
     var http = require('http').Server(expressApp);
     var events = require('events');
     var dateFormat = require('dateformat');
-    var levenshtein = require('levenshtein');
+    var mmse = require('./mmse');
 
 
     // --------------------------------
@@ -36,7 +36,7 @@
 
     function persist() {
         fs.writeFile(persistanceFilename,
-            JSON.stringify(db, null, 4), function (err) {
+            JSON.stringify(db, null, 2), function (err) {
                 if (err) {
                     console.log(err);
                 } else {
@@ -57,7 +57,21 @@
 
     // REST API
     expressApp.get("/api/exams/", function (request, response) {
-        response.json({hello: 1});
+
+        var exams = [];
+        var userId;
+        for (userId in db.exams)
+        {
+            var exam = db.exams[userId];
+
+            exams.push({
+                id: userId,
+                name: exam.history[0].name,
+                score: exam.history[0].score.total
+            })
+
+        }
+        response.json(exams);
     });
 
     expressApp.get("/api/exams/:userId", function (request, response) {
@@ -85,17 +99,11 @@
             db.exams[userId] = dbExam;
         }
 
-        // TODO calculate the score
-        var score = 3;
-
         // ------------------------------------
         // Calculate Score
 
-
-        // EXP
-        var a = new levenshtein( 'hello', 'ello' );
-        console.log(chalk.bold.yellow(a.distance));
-
+        var score = mmse.calculateExamScore(exam);
+        exam.score = score;
 
         // ------------------------------------
         //

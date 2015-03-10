@@ -3,37 +3,41 @@
 
     var app = angular.module('mmse-app');
 
-    app.controller("ExamController", function ($scope,$window, $routeParams, SharedService) {
+    app.controller("ExamController", function ($scope, $window, $routeParams, SharedService) {
         var vm = $scope;
         vm.stage = $routeParams.stage;
         vm.exam = SharedService.getExam();
 
         vm.isValidStage = SharedService.isValidStage(vm.stage);
-        if (vm.stage == 'finish')
-        {
-            SharedService.submitExam();
-        }
 
-        vm.back = function()
-        {
+        vm.back = function () {
             $window.history.back();
         };
 
         var startTime = new Date();
-        vm.next = function(nextStage)
-        {
+        vm.next = function (nextStage) {
+
             var endTime = new Date();
 
-            var duration = endTime.getTime() - startTime.getTime() ;
+            var duration = endTime.getTime() - startTime.getTime();
 
-            if (!vm.exam.duration)
-            {
+            if (!vm.exam.duration) {
                 vm.exam.duration = {};
             }
 
             vm.exam.duration[vm.stage] = duration;
 
-            SharedService.setStage(nextStage);
+
+            if (nextStage == 'finish') {
+                SharedService.submitExam().success(function () {
+                    var id = vm.exam.id;
+                    SharedService.clearExam();
+                    SharedService.go('/reports/' + id);
+                });
+            }
+            else {
+                SharedService.setStage(nextStage);
+            }
         }
     });
 

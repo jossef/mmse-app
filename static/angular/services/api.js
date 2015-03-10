@@ -7,7 +7,7 @@
 
             return {
                 submitExam:submitExam,
-                getExam:getExam,
+                getExam:getExam
             };
 
             function submitExam(exam)

@@ -15,7 +15,8 @@
         'timer',
         'angular.filter',
         'LocalStorageModule',
-        'google.places'
+        'google.places',
+        'n3-line-chart'
     ]);
 
     // ......................................................
@@ -37,13 +38,13 @@
                     templateUrl: "/static/views/exam.html",
                     controller: 'ExamController'
                 })
-                .when('/devices/:id', {
-                    templateUrl: "/static/views/device.html",
-                    controller: 'DeviceController'
+                .when('/reports/:id', {
+                    templateUrl: "/static/views/report.html",
+                    controller: 'ReportController'
                 })
-                .when('/devices', {
-                    templateUrl: "/static/views/devices.html",
-                    controller: 'DevicesController'
+                .when('/reports', {
+                    templateUrl: "/static/views/reports.html",
+                    controller: 'ReportsController'
                 })
                 .otherwise({
                     redirectTo: '/'

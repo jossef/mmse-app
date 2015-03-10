@@ -1,0 +1,311 @@
+<div class="container">
+    <div class="exam-info" ng-class="{'pointer':$index != selected}" ng-repeat="exam in exams"
+         ng-click="setSelected($index, exam)"
+            ng-hide="$index != 0 && !showHistory">
+
+        <div class="row" ng-if="$index == selected">
+            <div class="col-xs-12">
+
+                <h4>Exam report </h4>
+                <hr>
+            </div>
+            <div class="col-sm-6">
+                <div>
+                    <label>Date</label> {{exam.date}}
+                </div>
+
+                <div>
+                    <label>Id</label> {{exam.id}}
+                </div>
+
+                <div>
+                    <label>Name</label> {{exam.name}}
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <h3>
+                    <label>Score</label> {{exam.score.total | number:2}}
+                </h3>
+
+                <h4>
+                    <label>Duration</label> - {{getTotalTime(exam) / 1000 | number:2}} Seconds
+                </h4>
+            </div>
+
+            <div class="col-xs-12 hidden-xs">
+                <linechart data="chartData" options="chartOptions" mode="" width="" height="300"></linechart>
+            </div>
+
+
+
+            <div class="col-xs-12">
+            <br>
+            <h4>Time - {{exam.duration.time / 1000 | number:2}} Seconds</h4>
+
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Expected</th>
+                    <th>Received</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-class="{'warning':exam.score.year != 1}">
+                    <td>Year</td>
+                    <td>{{exam.expected.year}}</td>
+                    <td>{{exam.time.year}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.year"></mmse-report-score>
+                    </td>
+                </tr>
+                <tr ng-class="{'warning':exam.score.day != 1}">
+                    <td>Day</td>
+                    <td>{{exam.expected.day}}</td>
+                    <td>{{exam.time.day}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.day"></mmse-report-score>
+                    </td>
+                </tr>
+                <tr ng-class="{'warning':exam.score.month != 1}">
+                    <td>Month</td>
+                    <td>{{exam.expected.month}}</td>
+                    <td>{{exam.time.month}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.month"></mmse-report-score>
+                    </td>
+                </tr>
+                <tr ng-class="{'warning':exam.score.season != 1}">
+                    <td>Season</td>
+                    <td>{{exam.expected.season}}</td>
+                    <td>{{exam.time.season}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.season"></mmse-report-score>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+
+                </div>
+            <div class="col-xs-12">
+
+            <br>
+            <h4>Place - {{exam.duration.place / 1000 | number:2}} Seconds</h4>
+
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Expected</th>
+                    <th>Received</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-class="{'warning':exam.score.country != 1}">
+                    <td>Country</td>
+                    <td>{{exam.expected.country}}</td>
+                    <td>{{exam.place.country}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.country"></mmse-report-score>
+                    </td>
+                </tr>
+                <tr ng-class="{'warning':exam.score.city != 1}">
+                    <td>City</td>
+                    <td>{{exam.expected.city}}</td>
+                    <td>{{exam.place.city}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.city"></mmse-report-score>
+                    </td>
+                </tr>
+                <tr ng-class="{'warning':exam.score.floor != 1}">
+                    <td>Floor</td>
+                    <td>{{exam.expected.floor}}</td>
+                    <td>{{exam.place.floor}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.floor"></mmse-report-score>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+
+            </div>
+            <div class="col-xs-12">
+
+            <br>
+            <h4>Nouns - {{exam.duration.noun / 1000 | number:2}} Seconds</h4>
+
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Expected</th>
+                    <th>Received</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-class="{'warning':exam.score.nouns < 1}">
+                    <td>Nouns</td>
+                    <td>{{exam.expected.nouns.join(', ')}}</td>
+                    <td>{{exam.noun.inputs.join(', ')}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.nouns"></mmse-report-score>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            </div>
+            <div class="col-xs-12">
+
+            <br>
+            <h4>Visual Nouns - {{exam.duration.visnoun / 1000 | number:2}} Seconds</h4>
+
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Expected</th>
+                    <th>Received</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-class="{'warning':exam.score.visnouns < 1}">
+                    <td>Visual Nouns</td>
+                    <td>{{exam.expected.visnouns.join(', ')}}</td>
+                    <td><span ng-repeat="item in exam.visnoun">{{item.input}}, </span></td>
+                    <td>
+                        <mmse-report-score score="exam.score.visnouns"></mmse-report-score>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            </div>
+            <div class="col-xs-12">
+
+            <br>
+            <h4>Clock - {{exam.duration.clock / 1000 | number:2}} Seconds</h4>
+
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Expected</th>
+                    <th>Received</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-class="{'warning':exam.score.clock < 1}">
+                    <td>Sentence Translation</td>
+                    <td>{{exam.expected.clock}}</td>
+                    <td>{{exam.clock.sentence}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.clock"></mmse-report-score>
+                    </td>
+                </tr>
+                <tr ng-class="{'warning':exam.score.analog < 1}">
+                    <td>Analog Clock Input</td>
+                    <td>{{exam.expected.analog}}</td>
+                    <td>{{exam.clock.analog.input}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.analog"></mmse-report-score>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            </div>
+            <div class="col-xs-12">
+
+            <br>
+            <h4>Calculations - {{(exam.duration.calc1 + exam.duration.calc2 + exam.duration.calc3 + exam.duration.calc4 + exam.duration.calc5) / 1000 | number:2}} Seconds</h4>
+
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Expected</th>
+                    <th>Received</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-class="{'warning':exam.score.calc1 < 1}">
+                    <td>Calculation #1</td>
+                    <td>{{exam.expected.calc1}}</td>
+                    <td>{{exam.calc1}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.calc1"></mmse-report-score>
+                    </td>
+                </tr>
+                <tr ng-class="{'warning':exam.score.calc2 < 1}">
+                    <td>Calculation #2</td>
+                    <td>{{exam.expected.calc2}}</td>
+                    <td>{{exam.calc2}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.calc2"></mmse-report-score>
+                    </td>
+                </tr>
+
+                <tr ng-class="{'warning':exam.score.calc3 < 1}">
+                    <td>Calculation #3</td>
+                    <td>{{exam.expected.calc3}}</td>
+                    <td>{{exam.calc3}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.calc3"></mmse-report-score>
+                    </td>
+                </tr>
+
+
+                <tr ng-class="{'warning':exam.score.calc4 < 1}">
+                    <td>Calculation #4</td>
+                    <td>{{exam.expected.calc4}}</td>
+                    <td>{{exam.calc4}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.calc4"></mmse-report-score>
+                    </td>
+                </tr>
+
+                <tr ng-class="{'warning':exam.score.calc5 < 1}">
+                    <td>Calculation #5</td>
+                    <td>{{exam.expected.calc5}}</td>
+                    <td>{{exam.calc5}}</td>
+                    <td>
+                        <mmse-report-score score="exam.score.calc5"></mmse-report-score>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            </div>
+
+        </div>
+
+        <div ng-show="$index != selected">
+            <span class="text-muted">{{exam.date}} | {{exam.score.total | number:2}}</span>
+        </div>
+
+    </div>
+
+    <div class="exam-info pointer" ng-hide="showHistory" ng-click="showHistory = true">
+        <span class="glyphicon glyphicon-plus"> </span> View history
+    </div>
+
+</div>
+
