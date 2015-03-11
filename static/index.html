@@ -2,13 +2,14 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Is Occupied</title>
+    <title>MMSE App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="/static/lib/bootswatch-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="/static/lib/angular/angular-csp.css" rel="stylesheet" type="text/css"/>
     <link href="/static/lib/angular-growl-v2/build/angular-growl.css" rel="stylesheet" type="text/css"/>
     <link href="/static/lib/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="/static/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/static/lib/angular-google-places-autocomplete/dist/autocomplete.min.css">
 </head>
 <body ng-app="mmse-app" ng-controller="ShellController" ng-cloak>
 
@@ -24,8 +25,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#/">
-                Mini Mental State Examination
+            <a class="navbar-brand" href="#/" tooltip="Mini Mental State Examination" style="padding-top: 7px">
+                <img  src="/static/img/logo.png" height="50">
             </a>
         </div>
 
@@ -36,10 +37,7 @@
                     <a href="#page-top"></a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#/results">Results</a>
-                </li>
-                <li class="page-scroll">
-                    <a ng-class="{'button': isCollapsed }" href="#/exam/start">Start</a>
+                    <a href="#/reports">Reports</a>
                 </li>
             </ul>
         </div>
@@ -52,27 +50,41 @@
 
 <div ng-view></div>
 
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<script src="/static/lib/Chart.js/Chart.js"></script>
 <script src="/static/lib/angular/angular.min.js"></script>
 <script src="/static/lib/angular-animate/angular-animate.min.js"></script>
 <script src="/static/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script src="/static/lib/angular-route/angular-route.min.js"></script>
 <script src="/static/lib/ng-socket-io/ng-socket-io.min.js"></script>
 <script src="/static/lib/socket.io-client/socket.io.js"></script>
+<script src="/static/lib/angular-chart.js/angular-chart.js"></script>
+<script src="/static/lib/angular-audio/app/angular.audio.js"></script>
 <script src="/static/lib/angular-growl-v2/build/angular-growl.min.js"></script>
 <script src="/static/lib/angular-timer/dist/angular-timer.min.js"></script>
 <script src="/static/lib/angular-filter/dist/angular-filter.min.js"></script>
+<script src="/static/lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
+<script src="/static/lib/angular-google-places-autocomplete/dist/autocomplete.min.js"></script>
+<script src="/static/lib/d3/d3.min.js"></script>
+<script src="/static/lib/n3-line-chart/build/line-chart.min.js"></script>
 
 <script src="/static/angular/mmse-app.js"></script>
 
 <script src="/static/angular/controllers/shell.js"></script>
-<script src="/static/angular/controllers/devices.js"></script>
+<script src="/static/angular/controllers/report.js"></script>
 <script src="/static/angular/controllers/exam.js"></script>
 <script src="/static/angular/controllers/main.js"></script>
+<script src="/static/angular/controllers/report.js"></script>
+<script src="/static/angular/controllers/reports.js"></script>
 
 <script src="/static/angular/services/shared.js"></script>
-<script src="/static/angular/services/device.js"></script>
+<script src="/static/angular/services/api.js"></script>
 
 <script src="/static/angular/directives/ng-enter.js"></script>
+<script src="/static/angular/directives/mmse-noun.js"></script>
+<script src="/static/angular/directives/mmse-visnoun.js"></script>
+<script src="/static/angular/directives/mmse-analog-clock.js"></script>
+<script src="/static/angular/directives/mmse-report-score.js"></script>
 
 </body>
 </html>

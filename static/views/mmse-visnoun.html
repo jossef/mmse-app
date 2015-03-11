@@ -1,0 +1,23 @@
+<div ng-hide="started">
+    <p>You will now about to view 3 different <strong>image nouns</strong>. each noun will be presented without limitation. you will need to write the noun shown in each image.</p>
+    <button class="btn btn-primary" ng-click="start()">Begin</button>
+</div>
+
+<div ng-show="started" class="text-center">
+
+    <div class="text-center">
+
+        <img class="img-responsive thumbnail" ng-src="/static/img/{{currentWord}}.jpg">
+    </div>
+
+
+    <div class="input-group" style="margin-top: 20px; margin-bottom: 20px;">
+        <input type="text" class="form-control" ng-model="input" placeholder="Type the noun appear in the image" ng-enter="next()">
+
+    <span class="input-group-btn">
+        <button class="btn btn-success" ng-click="next()"><i class="glyphicon glyphicon-arrow-right"></i></button>
+    </span>
+    </div>
+    <hr>
+
+</div>

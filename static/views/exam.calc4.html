@@ -1,0 +1,39 @@
+<form name="form" >
+
+    <h3>Calculation #4</h3>
+
+    <hr>
+
+    <h1 class="text-center">{{ exam.calc3 }} - 7 = ?</h1>
+    <div ng-class="{'has-success':form.id.$touched && form.id.$valid, 'has-error': form.id.$touched && !form.id.$valid}"
+         class="form-group has-feedback">
+
+        <label class="control-label"></label>
+        <input type="text"
+               name="id"
+               ng-model="exam.calc4"
+               ng-pattern="/^[0-9]+$/"
+               ng-trim="true"
+               ng-enter="form.$valid && next('visnoun')"
+               ng-required="true"
+               class="form-control input-lg"
+               placeholder="Enter the answer here">
+
+        <div ng-show="form.id.$touched" class="form-control-feedback">
+            <span ng-show="form.id.$valid" class="glyphicon glyphicon-ok"></span>
+            <span ng-hide="form.id.$valid" class="glyphicon glyphicon-remove"></span>
+        </div>
+        <p class="help-block" ng-show="form.id.$touched && form.id.$error.pattern">Invalid.</p>
+        <p class="help-block" ng-show="form.id.$touched && form.id.$error.required">This field is required.</p>
+
+    </div>
+
+</form>
+
+<button
+        ng-click="form.$valid && next('visnoun')"
+        ng-class="{'disabled btn-default': !form.$valid, 'btn-primary': form.$valid}"
+        class="btn btn-lg pull-right">Next
+</button>
+
+<div class="clearfix"></div>

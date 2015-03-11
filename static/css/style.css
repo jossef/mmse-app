@@ -3,56 +3,61 @@
   font-family: "Roboto Slab", serif;
   font-weight: 700; }
 
-.device-info {
+.exam-info {
   transition: all 250ms;
-  padding: 10px 5px 50px 15px; }
+  padding: 10px 5px 50px 15px;
+  margin-bottom: 20px; }
 
-.device-list {
+.pointer {
+  cursor: pointer; }
+
+.exam-list {
   font-family: "Roboto Slab", serif;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
-  .device-list .item {
+  .exam-list .item {
     min-height: 100px;
     margin-bottom: 20px;
     transition: all 250ms;
-    padding: 5px 5px 5px 15px; }
-    .device-list .item.occupied .icon {
-      color: #f44336; }
-    .device-list .item:hover {
+    padding: 5px 0px 0px 15px; }
+    .exam-list .item:hover {
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
       transform: translateY(-5px);
       cursor: pointer; }
-    .device-list .item .title {
-      font-size: 2em; }
-    .device-list .item .icon {
-      color: #4caf50;
+    .exam-list .item .title {
+      font-size: 1.5em; }
+    .exam-list .item .score {
+      color: #388e3c;
       float: right;
-      font-size: 3em;
+      font-size: 2.6em;
       position: relative;
       line-height: 100px;
       padding-right: 15px;
-      top: -5px; }
-    .device-list .item .content {
+      top: -20px;
+      font-weight: 700; }
+    .exam-list .item .content {
       float: left; }
 
 html, body {
-  background-color: #eeeeee;
+  background-color: #EEEEEE;
   font-family: "Roboto Slab", serif; }
 
-.paper, .device-info, .device-list .item {
-  background-color: white;
+.paper, .exam-info, .exam-list .item {
+  background-color: #fff;
   border-radius: 2px;
-  border: 1px solid #bdbdbd;
+  border: 1px solid #BDBDBD;
   padding: 20px; }
 
 .nav .button {
-  color: white !important;
+  color: #fff !important;
   background-color: #1e88e5; }
   .nav .button:hover {
     background-color: #1565c0 !important; }
 
 .btn {
   font-family: "Roboto Slab", serif; }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,24 @@
+<form name="form">
+
+    <h3>Nouns</h3>
+
+    <hr>
+
+
+    <div ng-show="exam.noun.source">
+        <p><strong class="text-success">This step is completed!</strong></p><p> <a href ng-click="exam.noun.source = undefined;">click here</a> if you still wish to do it again</p>
+    </div>
+
+    <div ng-if="!exam.noun.source">
+        <mmse-noun ng-model="exam.noun.source" ng-required="true"></mmse-noun>
+    </div>
+
+
+</form>
+
+<button ng-click="form.$valid && next('noun-inputs')"
+        ng-class="{'disabled btn-default': !form.$valid, 'btn-primary': form.$valid}"
+        class="btn btn-lg pull-right">Next
+</button>
+
+<div class="clearfix"></div>

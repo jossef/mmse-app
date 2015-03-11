@@ -1,0 +1,80 @@
+<form name="form" ng-init="exam.noun.inputs = exam.noun.inputs || []">
+
+    <h3>Noun Inputs</h3>
+
+    <hr>
+
+    <!-- First -->
+    <div ng-class="{'has-success':form.first.$touched && form.first.$valid, 'has-error': form.first.$touched && !form.first.$valid}"
+         class="form-group has-feedback">
+
+        <label class="control-label">First noun</label>
+        <input type="text" name="first"
+                ng-model="exam.noun.inputs[0]"
+                ng-enter="form.$valid && next('calc4')"
+                ng-required="true"
+                class="form-control input-lg"
+                ng-options="item for item in shared.countries">
+
+        <div ng-show="form.first.$touched" class="form-control-feedback">
+            <span ng-show="form.first.$valid" class="glyphicon glyphicon-ok"></span>
+            <span ng-hide="form.first.$valid" class="glyphicon glyphicon-remove"></span>
+        </div>
+        <p class="help-block" ng-show="form.first.$touched && form.first.$error.pattern">Invalid.</p>
+        <p class="help-block" ng-show="form.first.$touched && form.first.$error.required">This field is required.</p>
+    </div>
+
+
+    <!-- Second -->
+    <div ng-class="{'has-success':form.second.$touched && form.second.$valid, 'has-error': form.second.$touched && !form.second.$valid}"
+         class="form-group has-feedback">
+
+        <label class="control-label">Second noun</label>
+        <input type="text" name="second"
+                ng-model="exam.noun.inputs[1]"
+                ng-enter="form.$valid && next('calc4')"
+                ng-required="true"
+                class="form-control input-lg"
+                ng-options="item for item in shared.countries">
+
+
+        <div ng-show="form.second.$touched" class="form-control-feedback">
+            <span ng-show="form.second.$valid" class="glyphicon glyphicon-ok"></span>
+            <span ng-hide="form.second.$valid" class="glyphicon glyphicon-remove"></span>
+        </div>
+        <p class="help-block" ng-show="form.second.$touched && form.second.$error.pattern">Invalid.</p>
+        <p class="help-block" ng-show="form.second.$touched && form.second.$error.required">This field is required.</p>
+    </div>
+
+    <!-- Third -->
+    <div ng-class="{'has-success':form.third.$touched && form.third.$valid, 'has-error': form.third.$touched && !form.third.$valid}"
+         class="form-group has-feedback">
+
+        <label class="control-label">Third noun</label>
+        <input type="text"
+                name="third"
+                ng-model="exam.noun.inputs[2]"
+                ng-enter="form.$valid && next('calc4')"
+                ng-required="true"
+                class="form-control input-lg"
+                ng-options="item for item in shared.countries">
+
+
+        <div ng-show="form.third.$touched" class="form-control-feedback">
+            <span ng-show="form.third.$valid" class="glyphicon glyphicon-ok"></span>
+            <span ng-hide="form.third.$valid" class="glyphicon glyphicon-remove"></span>
+        </div>
+        <p class="help-block" ng-show="form.third.$touched && form.third.$error.pattern">Invalid.</p>
+        <p class="help-block" ng-show="form.third.$touched && form.third.$error.required">This field is required.</p>
+    </div>
+
+
+
+</form>
+
+<button ng-click="form.$valid && next('calc4')"
+        ng-class="{'disabled btn-default': !form.$valid, 'btn-primary': form.$valid}"
+        class="btn btn-lg pull-right">Next
+</button>
+
+<div class="clearfix"></div>

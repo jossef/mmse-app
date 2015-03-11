@@ -1,22 +1,18 @@
 <div class="container">
     <div class="paper col-md-push-2 col-md-8">
 
-        <div ng-switch="stage">
+        <div ng-hide="isValidStage">
+            <h3>Oops!
+                <small>unknown exam stage</small>
+            </h3>
 
-            <div ng-switch-default>
-                <h1>Oops!
-                    <small>unknown exam stage</small>
-                </h1>
-            </div>
-
-            <div ng-switch-when="start">
-                <ng-include src="'/static/views/exam.start.html'"></ng-include>
-            </div>
-
-            <div ng-switch-when="time">
-                <ng-include src="'/static/views/exam.time.html'"></ng-include>
-            </div>
+            <a href="#/" class="btn btn-primary pull-right">Return</a>
         </div>
+
+        <div ng-if="isValidStage">
+            <ng-include src="'/static/views/exam.' + stage + '.html'"></ng-include>
+        </div>
+
     </div>
 </div>
 

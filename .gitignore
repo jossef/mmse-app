@@ -1,7 +1,6 @@
 .DS_Store
 .nodemonignore
 .sass-cache/
-config.js
 npm-debug.log
 node_modules/
 static/lib

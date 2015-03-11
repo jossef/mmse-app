@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="col-sm-6 col-sm-push-3">
+        <form class="" role="search">
+            <div class="form-group">
+                <input type="text" ng-model="filter" class="form-control" placeholder="Search">
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr>
+        
+<div class="container">
+    <div class="row exam-list">
+        <div class="col-xs-12 col-sm-6 col-md-4"
+             ng-repeat="exam in exams | filter:filter"
+             ng-click="shared.go('/reports/'+exam.id)">
+
+            <div class="item" ng-class="{'occupied':exam.occupied}">
+                <div class="score">
+                    <p>{{exam.score | number:2}}</p>
+
+                </div>
+                <div class="content">
+                    <p class="title">{{exam.id}}</p>
+                    <p>{{exam.name}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+@import "../lib/material-colors/dist/colors.sass"
+
+$item-height: 100px
+
+.exam-info
+  @extend .paper
+  transition: all 250ms
+  padding: 10px 5px 50px 15px
+  margin-bottom: 20px
+
+.pointer
+  cursor: pointer
+
+.exam-list
+  font-family: 'Roboto Slab', serif
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+  .item
+    @extend .paper
+    min-height: $item-height
+    margin-bottom: 20px
+    transition: all 250ms
+    padding: 5px 0px 0px 15px
+
+
+    &:hover
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+      transform: translateY(-5px)
+      cursor: pointer
+
+    .title
+      font-size: 1.5em
+
+
+    .score
+      color: $md-green-700
+      float: right
+      font-size: 2.6em
+      position: relative
+      line-height: $item-height
+      padding-right: 15px
+      top: -20px
+      font-weight: 700
+
+    .content
+      float: left
+
+
