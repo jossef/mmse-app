@@ -19,7 +19,21 @@
                 var nouns = SharedService.shuffle(SharedService.nouns).splice(0, requiredNouns);
                 var index = 0;
 
+                var itemTime = new Date();
+
+                var getTime = function() {
+                    var now = new Date();
+                    vm.seconds =  parseInt((itemTime.getTime() - now.getTime() + duration )  / 1000);
+
+                    if (vm.started)
+                    {
+                        $timeout(getTime, 500);
+                    }
+                };
+
+
                 var processItem = function () {
+                    itemTime = new Date();
                     vm.currentWord = nouns[index];
                     index++;
 
@@ -35,8 +49,9 @@
 
                 vm.started = false;
                 vm.start = function () {
-                    processItem();
                     vm.started = true;
+                    processItem();
+                    getTime();
                 }
 
             }

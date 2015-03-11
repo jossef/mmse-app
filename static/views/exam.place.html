@@ -12,15 +12,18 @@
          class="form-group has-feedback">
 
         <label class="control-label">Country</label>
-        <select name="country"
-                ng-model="exam.place.country"
-                ng-enter="form.$valid && next('calc3')"
-                ng-required="true"
-                class="form-control input-lg"
-                ng-options="item for item in shared.countries">
 
-            <option value="" disabled>Choose Country</option>
-        </select>
+        <input type="text"
+               name="country"
+               ng-model="exam.place.country"
+               ng-pattern="/^([ \u00c0-\u01ffa-zA-Z'\-])+$/"
+               ng-enter="form.$valid && next('calc3')"
+               ng-required="true"
+               class="form-control input-lg"
+               placeholder="Enter the current country"
+               typeahead="country for country in shared.countries | filter:$viewValue | limitTo:8"
+                >
+
 
         <div ng-show="form.country.$touched" class="form-control-feedback">
             <span ng-show="form.country.$valid" class="glyphicon glyphicon-ok"></span>

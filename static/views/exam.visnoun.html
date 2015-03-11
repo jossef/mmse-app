@@ -17,6 +17,7 @@
 </form>
 
 <button ng-click="form.$valid && next('calc5')"
+        ng-hide="!form.$valid"
         ng-class="{'disabled btn-default': !form.$valid, 'btn-primary': form.$valid}"
         class="btn btn-lg pull-right">Next
 </button>

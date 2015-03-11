@@ -136,7 +136,8 @@
         var analogClockHours = exam.clock.analog.source.hours;
         var analogClockMinutes = exam.clock.analog.source.minutes;
         var analogExpected = analogClockHours + ':' + analogClockMinutes;
-        var analogInput = exam.clock.analog.input;
+        var analogSplit = exam.clock.analog.input.split(':');
+        var analogInput = parseInt(analogSplit[0]) + ':' +  parseInt(analogSplit[1]);
         var analogResult = checkAnswer(analogExpected, analogInput);
 
 
